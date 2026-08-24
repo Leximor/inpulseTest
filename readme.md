@@ -31,7 +31,7 @@ TypeError: Object of type Decimal is not JSON serializable
 
 **Исправление** — отдать сериализацию `DjangoJSONEncoder`. Он сам рекурсивно обходит вложенный dict и кодирует `Decimal`, `datetime`/`date`/`time`, `UUID`, lazy `Promise`. На входе ничего не проверяем:
 
-```
+
 
 `Decimal` уходит строкой, не `float` — точность не теряется. Ключ как в задании: `user:{user_id}:last_loc`.
 
@@ -58,5 +58,3 @@ envsubst '${DOMAIN}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 Сертификаты монтируются с хоста целиком (`/etc/letsencrypt`), а не только `live/`: certbot держит там симлинки в `archive/`.
 
 Смена домена: новый `DOMAIN`, сертификат уже лежит по пути certbot, `docker compose up -d nginx`.
-
----
